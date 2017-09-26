@@ -3,7 +3,7 @@ import argparse
 import os
 import sys
 import arrays_generator as ar_gen
-from sort import read_json_file, Timer, write_json_in_file
+from sort import read_json_file, Timer
 from copy import deepcopy
 from pprint import pprint
 from sys import platform
@@ -22,7 +22,7 @@ TIME = "TIME"
 SIZE = "SIZE"
 PERMUTATIONS = "PERM"
 COMPARISONS = "COMP"
-SORT_FUNC = [merge_sort, shell_sort, bubble_sort, hoare_sort, radix_sort, sorted]
+SORT_FUNC = [merge_sort, shell_sort, bubble_sort, hoare_sort, radix_sort]
 RANDOM = "RND"
 BEST = "BEST"
 WORST = "WORST"
@@ -42,7 +42,7 @@ def make_result_dict(numbers):
 
 def fill_result_dict(cases, result_dict, num):
     for func in SORT_FUNC:
-        for case in cases:
+        for case in CASES:
             with Timer() as timer:
                 result = func(cases[case])
             result_dict[case][func.__name__][num][TIME] = timer.total_ms
@@ -70,6 +70,24 @@ def main():
         action='store_true',
         dest='output',
         help='choose, whether to print result on the screen, or write into file')
+    parser.add_argument(
+        '-b',
+        '--best',
+        action='store_true',
+        dest='best',
+        help='generate best data')
+    parser.add_argument(
+        '-w',
+        '--worst',
+        action='store_true',
+        dest='worst',
+        help='generate worst data')
+    parser.add_argument(
+        '-r',
+        '--random',
+        action='store_true',
+        dest='random',
+        help='generate random data')
     args = parser.parse_args()
 
     if platform.startswith("linux"):
@@ -79,6 +97,16 @@ def main():
 
     for num in args.num:
         os.system("{0} arrays_generator.py -r -w -b -o {1} -n {1}".format(python, num))
+
+    if not args.random:
+        CASES.remove(RANDOM)
+    if not args.best:
+        CASES.remove(BEST)
+    if not args.worst:
+        CASES.remove(WORST)
+
+    if len(CASES) == 0:
+        CASES.extend([RANDOM, WORST, BEST])
 
     result = make_result_dict(args.num)
     for num in args.num:

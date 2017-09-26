@@ -19,6 +19,7 @@ def generate_random_array(quantity):
 
 def generate_best_case_array(quantity):
     array = sorted(random.randint(-9999999, 99999999) for _ in range(quantity))
+    # array = sorted(random.randint(-99, 99) for _ in range(quantity))  # can be used for radix sort
     return array
 
 

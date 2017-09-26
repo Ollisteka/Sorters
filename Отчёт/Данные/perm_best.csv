@@ -1,0 +1,13 @@
+Arrays' count,Perm,Perm,Perm,Perm,Perm,Perm
+,Number,Number,Number,Number,Number,Number
+,merge_sort,shell_sort,bubble_sort,hoare_sort,radix_sort
+100,336,0,0,0,0
+200,772,0,0,0,0
+300,1244,0,0,0,0
+400,1744,0,0,0,0
+500,2244,0,0,0,0
+1000,4988,0,0,0,0
+1500,7976,0,0,0,0
+2000,10976,0,0,0,0
+3000,17452,0,0,0,0
+5000,30904,0,0,0,0
