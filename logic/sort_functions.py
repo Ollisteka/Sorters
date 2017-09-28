@@ -131,7 +131,8 @@ def shell_sort(iterable, step=None, cmp=None, reverse=False):
     """
     array = LogList(iterable)
     if step is None:
-        step = __generate_default_step(len(array), 0)
+        # step = __generate_default_step(len(array), 0)
+        step = iter([1, 4, 10, 23, 57, 132, 301, 701, 1750])  # marcin ciur step
         step_len = next(step)
     else:
         step_len = next(step)
@@ -175,7 +176,7 @@ def __partition(array, start, end, cmp, reverse):
             return cmp(x, y)
     # pivot_index = random.randint(start, end)
     pivot_index = (start + end + 1) // 2
-    # pivot_index = end
+    # pivot_index = end  # for worst case
     pivot = array[pivot_index]
     left_index = start
     right_index = end
